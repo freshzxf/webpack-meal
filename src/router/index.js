@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import test from '@/components/HelloWorld'
 import index from '@/views/index/index'
+import orders from '@/views/orders'
 
 Vue.use(Router)
 
@@ -13,9 +13,9 @@ export default new Router({
       component: index
     },
     {
-      path: '/test',
-      name: 'test',
-      component: test
+      path: '/orders',
+      name: 'orders',
+      component: orders
     }
   ]
 })

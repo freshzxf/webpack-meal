@@ -1,122 +1,107 @@
 <template>
-  <div>
+  <v-container>
     <!--导航-->
-    <v-toolbar color="blue" dark transition="">
+    <v-toolbar color="blue" dark fixed scroll-off-screen>
       <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title class="white--text">Inbox</v-toolbar-title>
+      <v-toolbar-title class="white--text">营养餐系统</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
-    <!--头像-->
-    <v-avatar
-      :tile="false"
-      :size="avatarSize"
-      color=""
-    >
-      <img src="http://img0.imgtn.bdimg.com/it/u=892880182,3985643208&fm=27&gp=0.jpg" alt="avatar">
-    </v-avatar>
-    <!--list-->
-    <v-list two-line>
-      <template v-for="(item, index) in items">
-        <v-subheader
-          v-if="item.header"
-          :key="item.header"
-        >
-          {{ item.header }}
-        </v-subheader>
 
-        <v-divider
-          class=""
-          v-else-if="item.divider"
-          :inset="item.inset"
-          :key="index"
-        ></v-divider>
-
-        <v-list-tile
-          v-else
-          :key="item.title"
-          avatar
-        >
-          <v-list-tile-avatar>
-            <img :src="item.avatar">
-          </v-list-tile-avatar>
-
-          <v-list-tile-content>
-            <v-list-tile-title v-html="item.title"></v-list-tile-title>
-            <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </template>
-    </v-list>
-
-    <v-container grid-list-md text-xs-center>
-      <v-layout row wrap>
-        <v-flex xs12>
-          <v-card dark color="primary" class="blue white--text">
-            <v-card-text class="px-0">
-              <router-link to="test">Home</router-link>
-            </v-card-text>
-          </v-card>
+      <!--菜单组-->
+      <v-layout grid-list-sm row wrap style="margin-top: 56px" >
+        <v-flex class="mb-3" xs3>
+          <v-btn class="mb-2" color="error" fab depressed>
+            <v-icon>alarm</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
         </v-flex>
-        <v-flex v-for="i in 2" :key="`6${i}`" xs6>
-          <v-card dark color="secondary">
-            <v-card-text class="px-0">6</v-card-text>
-          </v-card>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="green" fab depressed>
+            <v-icon color="white">list_alt</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
         </v-flex>
-        <v-flex v-for="i in 3" :key="`4${i}`" xs4>
-          <v-card dark color="primary">
-            <v-card-text class="px-0">4</v-card-text>
-          </v-card>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="blue" fab depressed>
+            <v-icon color="white">how_to_reg</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
         </v-flex>
-        <v-flex v-for="i in 4" :key="`3${i}`" xs3>
-          <v-card dark color="secondary">
-            <v-card-text class="px-0">3</v-card-text>
-          </v-card>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="orange" fab depressed>
+            <v-icon color="white">dvr</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
         </v-flex>
-        <v-flex v-for="i in 6" :key="`2${i}`" xs2>
-          <v-card dark color="primary">
-            <v-card-text class="px-0">2</v-card-text>
-          </v-card>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="amber" fab depressed>
+            <v-icon color="white">data_usage</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
         </v-flex>
-        <v-flex v-for="i in 12" :key="`1${i}`" xs1>
-          <v-card dark color="secondary">
-            <v-card-text class="px-0">1</v-card-text>
-          </v-card>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="cyan" fab depressed>
+            <v-icon color="white">wifi_tethering</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
+        </v-flex>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="teal" fab depressed>
+            <v-icon color="white">wifi_tethering</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
+        </v-flex>
+        <v-flex xs3>
+          <v-btn class="mb-2" color="indigo" fab depressed>
+            <v-icon color="white">wifi_tethering</v-icon>
+          </v-btn>
+          <div>菜单文字</div>
         </v-flex>
       </v-layout>
-    </v-container>
-  </div>
+
+    <v-bottom-nav
+      :active.sync="activeBtn"
+      :value="showNav"
+      fixed
+      color="white"
+    >
+      <v-btn flat color="teal">
+        <span>首页</span>
+        <v-icon>home</v-icon>
+      </v-btn>
+
+      <router-link to="/orders" tag="button">
+        <v-btn flat color="teal">
+          <span>客服</span>
+          <v-icon>phone</v-icon>
+        </v-btn>
+      </router-link>
+
+      <v-btn flat color="teal">
+        <span>我的</span>
+        <v-icon>person</v-icon>
+      </v-btn>
+
+      <v-btn flat color="teal">
+        <span>我的</span>
+        <v-icon color="">person</v-icon>
+      </v-btn>
+    </v-bottom-nav>
+  </v-container>
 </template>
 <script>
   /* eslint-disable */
   export default {
     name: 'index',
-    props: [{transition: 'v-scale-transition'}],
     data() {
       return {
-        avatarSize: 60,
-        items: [
-          { header: 'Today' },
-          {
-            avatar: 'http://img0.imgtn.bdimg.com/it/u=892880182,3985643208&fm=27&gp=0.jpg',
-            title: 'Brunch this weekend?',
-            subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-          },
-          { divider: true, inset: true },
-          {
-            avatar: 'http://img0.imgtn.bdimg.com/it/u=892880182,3985643208&fm=27&gp=0.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-            subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-          },
-          { divider: true, inset: true },
-          {
-            avatar: 'http://img0.imgtn.bdimg.com/it/u=892880182,3985643208&fm=27&gp=0.jpg',
-            title: 'Oui oui',
-            subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-          }
-        ]
+        switch1: true,
+        switch2: false,
+        activeBtn: 0,
+        showNav: true
       }
     }
   }
