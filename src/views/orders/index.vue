@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--导航-->
-    <v-toolbar color="blue" dark fixed scroll-off-screen>
+    <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title class="white--text">食材订购单</v-toolbar-title>
       <v-spacer></v-spacer>

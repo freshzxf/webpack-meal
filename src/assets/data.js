@@ -1,25 +1,60 @@
+// 首页菜单
+export const IndexMenuDatas = [
+  {
+    text: '食材订购',
+    link: '/',
+    icon: 'home',
+    color: 'purple lighten-2 white--text'
+  }, {
+    text: '食材签收',
+    link: '/orders',
+    icon: 'phone',
+    color: 'blue lighten-2 white--text'
+  }, {
+    text: '食材出库',
+    link: '/phones',
+    icon: 'stay_current_portrait',
+    color: 'indigo lighten-2 white--text'
+  }, {
+    text: '食材盘存',
+    link: '/mine',
+    icon: 'person',
+    color: 'amber lighten-2 white--text'
+  }, {
+    text: '周期报表',
+    link: '/mine',
+    icon: 'person',
+    color: 'pink lighten-2 white--text'
+  }, {
+    text: '数据分析',
+    link: '/mine',
+    icon: 'person',
+    color: 'brown lighten-2 white--text'
+  }
+]
+
 // 底部Bar
 export const BottomBarDatas = [
   {
     text: '首页',
     link: '/',
     icon: 'home',
-    color: 'blue'
+    color: 'purple lighten-2'
   }, {
     text: '客服',
     link: '/orders',
     icon: 'phone',
-    color: 'blue'
+    color: 'purple lighten-2'
   }, {
     text: '电话本',
     link: '/phones',
     icon: 'stay_current_portrait',
-    color: 'blue'
+    color: 'purple lighten-2'
   }, {
     text: '我的',
     link: '/mine',
     icon: 'person',
-    color: 'blue'
+    color: 'purple lighten-2'
   }
 ]
 

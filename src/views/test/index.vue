@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <!--导航-->
-    <v-toolbar color="blue" dark fixed scroll-off-screen>
+    <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title class="white--text">测试路由组件</v-toolbar-title>
       <v-spacer></v-spacer>
