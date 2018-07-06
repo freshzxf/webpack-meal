@@ -62,46 +62,33 @@
         </v-flex>
       </v-layout>
 
+    <router-link :to="{path:'/test/test'}">测试路由组件</router-link>
+
+    <!--底部bar-->
     <v-bottom-nav
       :active.sync="activeBtn"
       :value="showNav"
       fixed
       color="white"
     >
-      <v-btn flat color="teal">
-        <span>首页</span>
-        <v-icon>home</v-icon>
+      <v-btn v-for="(item, index) in bottomBarDatas" flat :color="item.color" :to="item.link" :key="index">
+        <span>{{item.text}}</span>
+        <v-icon>{{item.icon}}</v-icon>
       </v-btn>
 
-      <router-link to="/orders" tag="button">
-        <v-btn flat color="teal">
-          <span>客服</span>
-          <v-icon>phone</v-icon>
-        </v-btn>
-      </router-link>
-
-      <v-btn flat color="teal">
-        <span>我的</span>
-        <v-icon>person</v-icon>
-      </v-btn>
-
-      <v-btn flat color="teal">
-        <span>我的</span>
-        <v-icon color="">person</v-icon>
-      </v-btn>
     </v-bottom-nav>
   </v-container>
 </template>
 <script>
+  import {BottomBarDatas} from '@/assets/data'
   /* eslint-disable */
   export default {
     name: 'index',
     data() {
       return {
-        switch1: true,
-        switch2: false,
+        showNav: true,
         activeBtn: 0,
-        showNav: true
+        bottomBarDatas: BottomBarDatas
       }
     }
   }

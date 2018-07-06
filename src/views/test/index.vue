@@ -1,14 +1,22 @@
 <template>
-  <div>
+  <v-container>
     <!--导航-->
     <v-toolbar color="blue" dark fixed scroll-off-screen>
       <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title class="white--text">食材订购单</v-toolbar-title>
+      <v-toolbar-title class="white--text">测试路由组件</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>search</v-icon>
       </v-btn>
     </v-toolbar>
+
+    <v-avatar
+      :tile="false"
+      :size="avatarSize"
+      color="grey lighten-4"
+    >
+      <img src="http://img1.imgtn.bdimg.com/it/u=1647694873,753024156&fm=27&gp=0.jpg" alt="avatar">
+    </v-avatar>
 
     <!--底部bar-->
     <v-bottom-nav
@@ -23,18 +31,19 @@
       </v-btn>
 
     </v-bottom-nav>
-  </div>
+
+  </v-container>
 </template>
 <script>
   import {BottomBarDatas} from '@/assets/data'
   /* eslint-disable */
   export default {
-    name: 'orders',
+    name: 'test',
     data() {
       return {
-        avatarSize: 60,
-        activeBtn: 1,
+        avatarSize: 100,
         showNav: true,
+        activeBtn: 3,
         bottomBarDatas: BottomBarDatas
       }
     }
