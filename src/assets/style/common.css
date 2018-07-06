@@ -28,30 +28,6 @@
   overflow: hidden;
 }
 
-.z-head {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  display: block;
-}
-
-.z-foot {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  display: block;
-}
-
-.z-page .z-content {
-  display: block;
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-}
-
 .router-view {
   overflow: hidden;
   position: absolute;
