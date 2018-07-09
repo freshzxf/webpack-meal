@@ -1,39 +1,39 @@
-// 首页菜单
+// 首页菜单(link地址为在路由中命名的组件名称)
 export const IndexMenuDatas = [
   {
     text: '食材订购',
-    link: '/',
+    link: 'test',
     icon: 'home',
     color: 'purple lighten-2 white--text'
   }, {
     text: '食材签收',
-    link: '/orders',
+    link: 'orders',
     icon: 'phone',
     color: 'blue lighten-2 white--text'
   }, {
     text: '食材出库',
-    link: '/phones',
+    link: 'phones',
     icon: 'stay_current_portrait',
     color: 'indigo lighten-2 white--text'
   }, {
     text: '食材盘存',
-    link: '/mine',
+    link: 'mine',
     icon: 'person',
     color: 'amber lighten-2 white--text'
   }, {
     text: '周期报表',
-    link: '/mine',
+    link: 'mine',
     icon: 'person',
     color: 'pink lighten-2 white--text'
   }, {
-    text: '数据分析',
-    link: '/mine',
-    icon: 'person',
+    text: '就餐统计',
+    link: 'dining',
+    icon: 'bar_chart',
     color: 'brown lighten-2 white--text'
   }
 ]
 
-// 底部Bar
+// 底部Bar(link地址为在路由中配置的url地址)
 export const BottomBarDatas = [
   {
     text: '首页',

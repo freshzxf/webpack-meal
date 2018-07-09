@@ -1,96 +1,11 @@
 <template>
-  <!--<v-container>
-    &lt;!&ndash;导航&ndash;&gt;
-    &lt;!&ndash;<v-toolbar color="blue" dark fixed scroll-off-screen>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title class="white&#45;&#45;text">营养餐系统</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-    </v-toolbar>&ndash;&gt;
-
-    &lt;!&ndash;菜单组&ndash;&gt;
-    &lt;!&ndash;<v-layout grid-list-sm row wrap style="margin-top: 56px">
-      <v-flex class="mb-3" xs3>
-        <v-btn class="mb-2" color="error" fab depressed>
-          <v-icon>alarm</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="green" fab depressed>
-          <v-icon color="white">list_alt</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="blue" fab depressed>
-          <v-icon color="white">how_to_reg</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="orange" fab depressed>
-          <v-icon color="white">dvr</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="amber" fab depressed>
-          <v-icon color="white">data_usage</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="cyan" fab depressed>
-          <v-icon color="white">wifi_tethering</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="teal" fab depressed>
-          <v-icon color="white">wifi_tethering</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-      <v-flex xs3>
-        <v-btn class="mb-2" color="indigo" fab depressed>
-          <v-icon color="white">wifi_tethering</v-icon>
-        </v-btn>
-        <div>菜单文字</div>
-      </v-flex>
-    </v-layout>&ndash;&gt;
-
-    &lt;!&ndash;底部bar&ndash;&gt;
-    <v-bottom-nav
-      :active.sync="activeBtn"
-      :value="showNav"
-      fixed
-      color="white"
-    >
-      <v-btn v-for="(item, index) in bottomBarDatas" flat :color="item.color" :to="item.link" :key="index">
-        <span>{{item.text}}</span>
-        <v-icon>{{item.icon}}</v-icon>
-      </v-btn>
-
-    </v-bottom-nav>
-  </v-container>-->
-
-  <v-card class="elevation-0 grey lighten-3" style="height: 100%;">
+  <v-card class="elevation-0" tile style="height: 100%;">
     <v-card-media
       src="/static/img/bg.jpg"
       height="250px"
     >
 
       <div class="text-xs-left mt-4 ml-2">
-        <!--<v-badge
-          v-model="show"
-          color="purple"
-        >
-          <span slot="badge">6</span>
-        </v-badge>-->
-
         <v-btn icon color="white" fixed style="right: 15px;top: 25px">
           <v-icon color="purple lighten-4">notifications</v-icon>
         </v-btn>
@@ -121,7 +36,6 @@
             安顺市康源农副产品贸易有限责任公司
           </v-chip>
         </div>
-
       </div>
 
       <!--水纹-->
@@ -138,12 +52,14 @@
     <v-container grid-list-md fluid>
       <v-layout row wrap>
         <v-flex v-for="(item, index) in indexMenuDatas" :key="index" xs4>
-          <v-card class="elevation-0 pt-2 pb-2">
-            <v-btn class="mb-2" :color="item.color" fab depressed>
-              <v-icon>{{item.icon}}</v-icon>
-            </v-btn>
-            <div class="grey--text">{{item.text}}</div>
-          </v-card>
+          <router-link :to="{name: item.link}" tag="div">
+            <v-card class="elevation-0 py-2">
+              <v-btn class="mb-2" :color="item.color" fab depressed>
+                <v-icon>{{item.icon}}</v-icon>
+              </v-btn>
+              <div class="grey--text">{{item.text}}</div>
+            </v-card>
+          </router-link>
         </v-flex>
       </v-layout>
     </v-container>

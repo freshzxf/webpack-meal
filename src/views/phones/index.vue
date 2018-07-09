@@ -2,7 +2,10 @@
   <div>
     <!--导航-->
     <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen scroll-target="#scrolling">
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <!--<v-toolbar-side-icon></v-toolbar-side-icon>-->
+      <v-btn icon @click="$router.go(-1)">
+        <v-icon large>keyboard_arrow_left</v-icon>
+      </v-btn>
       <v-toolbar-title class="white--text">工作电话本</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
@@ -31,6 +34,7 @@
           v-else
           :key="item.title"
           avatar
+          @click="callPhone(item.phone)"
         >
           <v-list-tile-avatar>
             <img :src="item.avatar">
@@ -72,6 +76,11 @@
         showNav: true,
         bottomBarDatas: BottomBarDatas,
         phoneDatas: PhoneDatas
+      }
+    },
+    methods: {
+      callPhone: function (d) {
+        window.location.href = "tel:" + d;
       }
     }
   }

@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/views/index/index'
-import orders from '@/views/orders'
-import phones from '@/views/phones'
-import mine from '@/views/mine'
-import test from '@/views/test'
+// import index from '@/views/index/index'
 
 Vue.use(Router)
 
@@ -13,29 +9,34 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: index
+      component: resolve => require(['@/views/index/index'], resolve)
     },
     {
       path: '/orders',
       name: 'orders',
-      component: orders
+      component: resolve => require(['@/views/orders/index'], resolve)
     },
     {
       path: '/phones',
       name: 'phones',
-      component: phones
+      component: resolve => require(['@/views/phones/index'], resolve)
     },
     {
       path: '/mine',
       name: 'mine',
-      component: mine
+      component: resolve => require(['@/views/mine/index'], resolve)
+    },
+    {
+      path: '/dining',
+      name: 'dining',
+      component: resolve => require(['@/views/index/index'], resolve)
     },
     {
       path: '/test/test',
       name: 'test',
       components: {
-        'default': index,
-        'subPage': test
+        'default': resolve => require(['@/views/dining/index'], resolve),
+        'subPage': resolve => require(['@/views/test/index'], resolve)
       }
     }
   ]
