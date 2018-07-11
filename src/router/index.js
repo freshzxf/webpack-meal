@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import index from '@/views/index/index'
+import none from '@/views/error/none'
 
 Vue.use(Router)
 
@@ -15,6 +15,13 @@ export default new Router({
       path: '/orders',
       name: 'orders',
       component: resolve => require(['@/views/orders/index'], resolve)
+    },
+    {
+      path: '/orders/order',
+      name: 'ordersOrder',
+      components: {
+        subPage: resolve => require(['@/views/orders/order'], resolve)
+      }
     },
     {
       path: '/phones',
@@ -32,12 +39,8 @@ export default new Router({
       component: resolve => require(['@/views/index/index'], resolve)
     },
     {
-      path: '/test/test',
-      name: 'test',
-      components: {
-        'default': resolve => require(['@/views/dining/index'], resolve),
-        'subPage': resolve => require(['@/views/test/index'], resolve)
-      }
+      path: '*',
+      component: none
     }
   ]
 })

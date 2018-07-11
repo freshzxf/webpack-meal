@@ -2,12 +2,12 @@
 export const IndexMenuDatas = [
   {
     text: '食材订购',
-    link: 'test',
+    link: 'orders',
     icon: 'home',
     color: 'purple lighten-2 white--text'
   }, {
     text: '食材签收',
-    link: 'orders',
+    link: '',
     icon: 'phone',
     color: 'blue lighten-2 white--text'
   }, {
@@ -130,5 +130,117 @@ export const PhoneDatas = [
     title: '程思思',
     phone: '15107037763',
     subtitle: '紫云县康庄小学'
+  }
+]
+
+// 食材订购单
+export const OrdersList = [
+  {
+    title: '早餐',
+    from: '李明',
+    money: '3824',
+    state: 1,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000001'
+  },
+  {
+    title: '中餐',
+    from: '王二麻',
+    money: '3824',
+    state: 1,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000005'
+  },
+  {
+    title: '晚餐',
+    from: '程丹丹',
+    money: '3824',
+    state: 1,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000012'
+  },
+  {
+    title: '早餐',
+    from: '李明',
+    money: '3824',
+    state: 1,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000221'
+  },
+  {
+    title: '中餐',
+    from: '王二麻',
+    money: '3824',
+    state: 1,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000335'
+  },
+  {
+    title: '晚餐',
+    from: '程丹丹',
+    money: '3824',
+    state: 1,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000342'
+  },
+  {
+    title: '中餐',
+    from: '王思普',
+    money: '4556',
+    state: 2,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000002'
+  },
+  {
+    title: '中餐',
+    from: '李三大',
+    money: '4556',
+    state: 2,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000006'
+  },
+  {
+    title: '晚餐',
+    from: '李思维',
+    money: '4002',
+    state: 3,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000003'
+  },
+  {
+    title: '晚餐',
+    from: '陈思敏',
+    money: '4002',
+    state: 3,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000007'
+  },
+  {
+    title: '早餐',
+    from: '张近东',
+    money: '4002',
+    state: 4,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000004'
+  },
+  {
+    title: '早餐',
+    from: '张近东',
+    money: '4002',
+    state: 4,
+    range: '2018/03/09 ~ 2018/03/09',
+    creatTime: '2018/03/09 09:30:33',
+    id: '0000008'
   }
 ]
