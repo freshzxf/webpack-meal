@@ -48,9 +48,10 @@
         </v-card>
       </v-tab-item>
 
-      <v-btn color="purple lighten-2" depressed fab small outline>
+      <v-btn color="purple lighten-2" depressed fab small flat>
         B
       </v-btn>
+      <div color="purple lighten-2" class="font-weight-bold">B</div>
 
       <v-btn depressed small color="grey lighten-2">白菜</v-btn>
       <v-btn depressed small color="grey lighten-2">白花菜</v-btn>

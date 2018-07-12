@@ -22,6 +22,26 @@
 
     </v-toolbar>
 
+    <!--<v-dialog
+      v-model="loading"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="indigo lighten-2"
+        dark
+      >
+        <v-card-text>
+          数据加载中，请耐心等候...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>-->
     <!--数据列表-->
     <v-list two-line class="mt56">
       <template v-for="(item, index) in dataList">
@@ -62,26 +82,64 @@
           :key="index"
         ></v-divider>
       </template>
+      <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+        <v-dialog
+          v-model="busy"
+          hide-overlay
+          persistent
+          width="300"
+        >
+          <v-card
+            color="indigo lighten-2"
+            dark
+          >
+            <v-card-text>
+              数据加载中，请耐心等候...
+              <v-progress-linear
+                indeterminate
+                color="white"
+                class="mb-0"
+              ></v-progress-linear>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+      </div>
     </v-list>
-
   </div>
 </template>
 <script>
   import {OrdersList} from '@/assets/data'
+
   /* eslint-disable */
   export default {
     name: 'orders',
     data() {
       return {
-        dataList: OrdersList
+        loading: true,
+        busy: false,
+        page: 1, //默认载入第一页
+        flag: false, // 默认没有分页
+        dataList: []
       }
     },
+    created(){
+      this.getList()
+    },
+    components: {
+    },
     methods: {
+      getList: function(){
+        this.dataList = this.dataList.concat(OrdersList);
+        this.busy = false;
+      },
       viewDetail: function (id) {
         console.log(id)
       },
-      go: function () {
-        this.$router.push('orders/order')
+      loadMore: function() {
+        this.busy = true;
+        setTimeout(() => {
+          this.getList();
+        }, 1000);
       }
     }
   }
