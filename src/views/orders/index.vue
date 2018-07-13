@@ -101,19 +101,18 @@
           <span class="headline">条件筛选</span>
         </v-card-title>-->
         <v-card-title
-          class="headline grey lighten-2"
-          primary-title
-          style="height: 44px;"
+          class="headline purple lighten-2 white--text"
         >
           <span class="font-weight-thin title">条件筛选</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
+              <!--起始日期-->
               <v-flex xs12 sm6 md4>
                 <v-dialog
                   ref="startDateRef"
-                  v-model="modal"
+                  v-model="startDateModal"
                   :return-value.sync="startDate"
                   persistent
                   lazy
@@ -129,34 +128,44 @@
                   ></v-text-field>
                   <v-date-picker v-model="startDate" color="purple lighten-2" scrollable>
                     <v-spacer></v-spacer>
-                    <v-btn flat color="purple lighten-2" @click="modal = false">取消</v-btn>
+                    <v-btn flat color="purple lighten-2" @click="startDateModal = false">取消</v-btn>
                     <v-btn flat color="purple lighten-2" @click="$refs.startDateRef.save(startDate)">确认</v-btn>
                   </v-date-picker>
                 </v-dialog>
-
               </v-flex>
+              <!--截止日期-->
               <v-flex xs12 sm6 md4>
-                <v-text-field
-                  label="截止日期"
-                  readonly
-                  hint=""
-                ></v-text-field>
+                <v-dialog
+                  ref="endDateRef"
+                  v-model="endDateModal"
+                  :return-value.sync="endDate"
+                  persistent
+                  lazy
+                  full-width
+                  width="290px"
+                >
+                  <v-text-field
+                    slot="activator"
+                    label="起始日期"
+                    v-model="endDate"
+                    readonly
+                    hint=""
+                  ></v-text-field>
+                  <v-date-picker v-model="endDate" color="purple lighten-2" scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="purple lighten-2" @click="endDateModal = false">取消</v-btn>
+                    <v-btn flat color="purple lighten-2" @click="$refs.endDateRef.save(endDate)">确认</v-btn>
+                  </v-date-picker>
+                </v-dialog>
               </v-flex>
-              <!--<v-flex xs12 sm6>
+              <!--餐别筛选-->
+              <v-flex xs12 sm6 md4>
                 <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age"
-                  required
-                ></v-select>
-              </v-flex>-->
-              <v-flex xs12 sm6>
-                <v-autocomplete
                   :items="['早餐', '中餐', '晚餐']"
                   label="餐别筛选"
                   multiple
-                  chips
-                  readonly
-                ></v-autocomplete>
+                  max-height="400"
+                ></v-select>
               </v-flex>
             </v-layout>
           </v-container>
@@ -180,7 +189,10 @@
         ,flag: false // 默认没有分页
         ,backTop: false // 默认不显示返回顶部
         ,filter: false // 默认不显示返回顶部
-        ,startDate: '' // 起始日期
+        ,startDateModal: false
+        ,startDate: ''
+        ,endDateModal: false
+        ,endDate: ''
       }
     },
     created() {
