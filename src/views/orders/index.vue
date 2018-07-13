@@ -8,11 +8,11 @@
         <v-icon large>keyboard_arrow_left</v-icon>
       </v-btn>
 
-      <v-toolbar-title class="white--text">食材订购单</v-toolbar-title>
+      <v-toolbar-title class="white--text">食材订购单({{length}})</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn icon @click.stop="filter = true">
         <v-icon>search</v-icon>
       </v-btn>
 
@@ -22,28 +22,8 @@
 
     </v-toolbar>
 
-    <!--<v-dialog
-      v-model="loading"
-      hide-overlay
-      persistent
-      width="300"
-    >
-      <v-card
-        color="indigo lighten-2"
-        dark
-      >
-        <v-card-text>
-          数据加载中，请耐心等候...
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
-        </v-card-text>
-      </v-card>
-    </v-dialog>-->
     <!--数据列表-->
-    <v-list two-line class="mt56">
+    <v-list two-line class="mt56" v-scroll="onScroll">
       <template v-for="(item, index) in dataList">
         <v-list-tile
           :key="item.id"
@@ -82,7 +62,8 @@
           :key="index"
         ></v-divider>
       </template>
-      <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+      <div infinite-scroll-immediate-check="false" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy"
+           infinite-scroll-distance="0">
         <v-dialog
           v-model="busy"
           hide-overlay
@@ -105,41 +86,132 @@
         </v-dialog>
       </div>
     </v-list>
+    <!--返回顶部按钮-->
+    <v-fab-transition>
+      <v-btn v-show="backTop"
+        fab depressed small bottom left color="purple lighten-2" @click="backToTop()" fixed>
+        <v-icon dark>expand_less</v-icon>
+      </v-btn>
+    </v-fab-transition>
+    <!--筛选弹窗-->
+    <v-dialog v-model="filter" max-width="500px">
+      <!--<v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>-->
+      <v-card>
+        <!--<v-card-title>
+          <span class="headline">条件筛选</span>
+        </v-card-title>-->
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+          style="height: 44px;"
+        >
+          <span class="font-weight-thin title">条件筛选</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12 sm6 md4>
+                <v-dialog
+                  ref="startDateRef"
+                  v-model="modal"
+                  :return-value.sync="startDate"
+                  persistent
+                  lazy
+                  full-width
+                  width="290px"
+                >
+                  <v-text-field
+                    slot="activator"
+                    label="起始日期"
+                    v-model="startDate"
+                    readonly
+                    hint=""
+                  ></v-text-field>
+                  <v-date-picker v-model="startDate" color="purple lighten-2" scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="purple lighten-2" @click="modal = false">取消</v-btn>
+                    <v-btn flat color="purple lighten-2" @click="$refs.startDateRef.save(startDate)">确认</v-btn>
+                  </v-date-picker>
+                </v-dialog>
+
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field
+                  label="截止日期"
+                  readonly
+                  hint=""
+                ></v-text-field>
+              </v-flex>
+              <!--<v-flex xs12 sm6>
+                <v-select
+                  :items="['0-17', '18-29', '30-54', '54+']"
+                  label="Age"
+                  required
+                ></v-select>
+              </v-flex>-->
+              <v-flex xs12 sm6>
+                <v-autocomplete
+                  :items="['早餐', '中餐', '晚餐']"
+                  label="餐别筛选"
+                  multiple
+                  chips
+                  readonly
+                ></v-autocomplete>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="purple lighten-2" flat @click.native="filter = false">取消</v-btn>
+          <v-btn color="purple lighten-2" flat @click.native="filter = false">确认筛选</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
-  import {OrdersList} from '@/assets/data'
-
   /* eslint-disable */
   export default {
     name: 'orders',
     data() {
       return {
-        loading: true,
-        busy: false,
-        page: 1, //默认载入第一页
-        flag: false, // 默认没有分页
-        dataList: []
+        page: 1 // 默认载入第一页
+        ,flag: false // 默认没有分页
+        ,backTop: false // 默认不显示返回顶部
+        ,filter: false // 默认不显示返回顶部
+        ,startDate: '' // 起始日期
       }
     },
-    created(){
-      this.getList()
+    created() {
+      this.loadMore()
     },
-    components: {
+    computed: {
+      busy() {
+        return this.$store.state.orders.busy
+      },
+      dataList() {
+        return this.$store.state.orders.ordersList
+      },
+      length() {
+        return this.$store.state.orders.ordersList.length
+      }
     },
     methods: {
-      getList: function(){
-        this.dataList = this.dataList.concat(OrdersList);
-        this.busy = false;
-      },
       viewDetail: function (id) {
         console.log(id)
       },
-      loadMore: function() {
-        this.busy = true;
-        setTimeout(() => {
-          this.getList();
-        }, 1000);
+      loadMore: function () {
+        // 此异步操作需要返回值关闭loading
+        this.$store.dispatch('initList')
+        this.hidden = !this.hidden
+      },
+      backToTop: function () {
+        this.$vuetify.goTo(0, {duration: 100})
+      },
+      onScroll: function () {
+        let offsetTop = window.pageYOffset || document.documentElement.scrollTop
+        offsetTop > 500 ? this.backTop = true : this.backTop = false
       }
     }
   }
