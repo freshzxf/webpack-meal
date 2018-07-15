@@ -102,8 +102,7 @@
         </v-card-title>-->
         <v-card-title
           class="headline purple lighten-2 white--text"
-        >
-          <span class="font-weight-thin title">条件筛选</span>
+        >条件筛选
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
