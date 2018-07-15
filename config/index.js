@@ -10,7 +10,24 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/sexy': {
+        // 测试环境
+        target: 'http://www.aaleg.cc/',  // 接口域名
+        changeOrigin: true,  //是否跨域
+        pathRewrite: {
+          '^/sexy': ''   //需要rewrite重写的,
+        }
+      },
+      '/music': {
+        // 测试环境
+        target: 'http://musicapi.duapp.com/api.php',  // 接口域名
+        changeOrigin: true,  //是否跨域
+        pathRewrite: {
+          '^/music': ''   //需要rewrite重写的,
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -51,6 +68,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
+    //assetsPublicPath: path.resolve(__dirname, '../dist'),
 
     /**
      * Source Maps

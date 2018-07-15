@@ -145,7 +145,7 @@
                 >
                   <v-text-field
                     slot="activator"
-                    label="起始日期"
+                    label="截止日期"
                     v-model="endDate"
                     readonly
                     hint=""

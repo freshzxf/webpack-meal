@@ -1,7 +1,7 @@
 <template>
   <v-card class="elevation-0" tile style="height: 100%;">
     <v-card-media
-      src="../../../static/img/bg.jpg"
+      src="/static/img/bg.jpg"
       height="250px"
     >
 
@@ -79,13 +79,15 @@
     </v-bottom-nav>
 
   </v-card>
-
 </template>
 <script>
   import {IndexMenuDatas, BottomBarDatas} from '@/assets/data'
+
   /* eslint-disable */
   export default {
     name: 'index',
+    created() {
+    },
     data() {
       return {
         showNav: true,
@@ -142,7 +144,7 @@
   }
 
   .water-1 {
-    background: url('../../../static/img/water-1.svg') repeat-x;
+    background: url('/static/img/water-1.svg') repeat-x;
     background-size: 600px;
     -webkit-animation: wave-animation-1 3.5s infinite linear;
     animation: wave-animation-1 3.5s infinite linear
@@ -150,7 +152,7 @@
 
   .water-2 {
     top: 5px;
-    background: url('../../../static/img/water-2.svg') repeat-x;
+    background: url('/static/img/water-2.svg') repeat-x;
     background-size: 600px;
     -webkit-animation: wave-animation-2 6s infinite linear;
     animation: wave-animation-2 6s infinite linear
