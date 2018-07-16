@@ -15,7 +15,7 @@
 
     <v-card class="elevation-0" tile style="height: 100%;">
       <v-card-media
-        src="/static/img/bg.jpg"
+        src="/static/img/bg1.jpg"
         height=""
       >
         <v-avatar

@@ -12,7 +12,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click.stop="filter = true">
+      <v-btn icon @click.stop="drawer = true">
         <v-icon>search</v-icon>
       </v-btn>
 
@@ -62,7 +62,7 @@
           :key="index"
         ></v-divider>
       </template>
-      <div infinite-scroll-immediate-check="false" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy"
+      <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy"
            infinite-scroll-distance="0">
         <v-dialog
           v-model="busy"
@@ -86,28 +86,30 @@
         </v-dialog>
       </div>
     </v-list>
+
     <!--返回顶部按钮-->
     <v-fab-transition>
       <v-btn v-show="backTop"
-        fab depressed small bottom left color="purple lighten-2" @click="backToTop()" fixed>
+             fab depressed small bottom left color="purple lighten-2" @click="backToTop()" fixed>
         <v-icon dark>expand_less</v-icon>
       </v-btn>
     </v-fab-transition>
+
     <!--筛选弹窗-->
-    <v-dialog v-model="filter" max-width="500px">
-      <!--<v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>-->
+    <!--<v-dialog v-model="filter" max-width="500px">
+      &lt;!&ndash;<v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>&ndash;&gt;
       <v-card>
-        <!--<v-card-title>
+        &lt;!&ndash;<v-card-title>
           <span class="headline">条件筛选</span>
-        </v-card-title>-->
+        </v-card-title>&ndash;&gt;
         <v-card-title
-          class="headline purple lighten-2 white--text"
+          class="headline purple lighten-2 white&#45;&#45;text"
         >条件筛选
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
-              <!--起始日期-->
+              &lt;!&ndash;起始日期&ndash;&gt;
               <v-flex xs12 sm6 md4>
                 <v-dialog
                   ref="startDateRef"
@@ -132,7 +134,7 @@
                   </v-date-picker>
                 </v-dialog>
               </v-flex>
-              <!--截止日期-->
+              &lt;!&ndash;截止日期&ndash;&gt;
               <v-flex xs12 sm6 md4>
                 <v-dialog
                   ref="endDateRef"
@@ -157,11 +159,12 @@
                   </v-date-picker>
                 </v-dialog>
               </v-flex>
-              <!--餐别筛选-->
+              &lt;!&ndash;餐别筛选&ndash;&gt;
               <v-flex xs12 sm6 md4>
                 <v-select
                   :items="['早餐', '中餐', '晚餐']"
                   label="餐别筛选"
+                  v-model="mealType"
                   multiple
                   max-height="400"
                 ></v-select>
@@ -172,10 +175,107 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="purple lighten-2" flat @click.native="filter = false">取消</v-btn>
-          <v-btn color="purple lighten-2" flat @click.native="filter = false">确认筛选</v-btn>
+          <v-btn color="purple lighten-2" flat @click.native="filterData">确认筛选</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog>-->
+
+    <!--侧边栏-->
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      right
+      temporary
+    >
+      <!--<v-list class="pa-1">
+        <v-list-tile avatar>
+          <v-list-tile-avatar>
+            <img src="https://randomuser.me/api/portraits/men/85.jpg">
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title>条件筛选</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>-->
+      <v-divider></v-divider>
+      <v-container grid-list-md>
+        <v-layout wrap>
+          <!--起始日期-->
+          <v-flex xs12 sm6 md4>
+            <v-menu
+              ref="startDateRef"
+              :close-on-content-click="false"
+              v-model="startDateModal"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
+            >
+              <!--prepend-icon="event"-->
+              <v-text-field
+                slot="activator"
+                v-model="startDate"
+                label="配送起始日期"
+                readonly
+              ></v-text-field>
+              <v-date-picker v-model="startDate" no-title :first-day-of-week="1" locale="zh-cn"
+                             @input="startDateModal = false" color="purple lighten-2"></v-date-picker>
+            </v-menu>
+          </v-flex>
+          <!--截止日期-->
+          <v-flex xs12 sm6 md4>
+            <v-menu
+              ref="endDateRef"
+              :close-on-content-click="false"
+              v-model="endDateModal"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
+            >
+              <!--prepend-icon="event"-->
+              <v-text-field
+                slot="activator"
+                v-model="endDate"
+                label="配送截止日期"
+                readonly
+              ></v-text-field>
+              <v-date-picker v-model="endDate" no-title :first-day-of-week="1" locale="zh-cn"
+                             @input="endDateModal = false" color="purple lighten-2" scrollable></v-date-picker>
+            </v-menu>
+          </v-flex>
+          <!--餐别筛选-->
+          <v-flex xs12 sm6 md4>
+            <v-select
+              :items="['早餐', '中餐', '晚餐']"
+              label="所属餐别"
+              v-model="mealType"
+              multiple
+              max-height="400"
+            ></v-select>
+          </v-flex>
+        </v-layout>
+      </v-container>
+
+      <v-layout row>
+        <v-flex xs4>
+          <v-btn color="grey" depressed dark @click.native="drawer = false">取消</v-btn>
+        </v-flex>
+        <v-flex xs4>
+          <v-btn color="red lighten-2" depressed dark @click.native="clearForm">重置</v-btn>
+        </v-flex>
+        <v-flex xs4>
+          <v-btn color="purple lighten-2" depressed dark @click.native="filterData">确认筛选</v-btn>
+        </v-flex>
+      </v-layout>
+
+    </v-navigation-drawer>
   </div>
 </template>
 <script>
@@ -185,17 +285,15 @@
     data() {
       return {
         page: 1 // 默认载入第一页
-        ,flag: false // 默认没有分页
-        ,backTop: false // 默认不显示返回顶部
-        ,filter: false // 默认不显示返回顶部
-        ,startDateModal: false
-        ,startDate: ''
-        ,endDateModal: false
-        ,endDate: ''
+        , atThisPage: true // 在使用了keep-alive包裹显示组件的情况下，需要判断当前激活的组件是不是此组件，是的话才加载数据
+        , backTop: false // 默认不显示返回顶部
+        , drawer: false // 侧滑抽屉
+        , startDateModal: false
+        , startDate: ''
+        , endDateModal: false
+        , endDate: ''
+        , mealType: []
       }
-    },
-    created() {
-      this.loadMore()
     },
     computed: {
       busy() {
@@ -213,9 +311,31 @@
         console.log(id)
       },
       loadMore: function () {
-        // 此异步操作需要返回值关闭loading
-        this.$store.dispatch('initList')
-        this.hidden = !this.hidden
+        if (this.atThisPage) {
+          let sDate = this.startDate,
+            eDate = this.endDate,
+            mType = this.mealType,
+            page = this.page
+          // 触发vuex中定义的action方法（dispathch不分模块）
+          this.$store.dispatch('initList', {sDate, eDate, mType, page})
+          this.page++
+        }
+      },
+      filterData: function (startDate, endDate, mealType) {
+        if (this.atThisPage) {
+          this.drawer = false
+          let sDate = this.startDate,
+            eDate = this.endDate,
+            mType = this.mealType
+          this.filter = false
+          // 触发vuex中定义的action方法（dispathch不分模块）
+          this.$store.dispatch('initList', {sDate, eDate, mType, refresh: true})
+        }
+      },
+      clearForm: function () {
+        this.startDate = ''
+        this.endDate = ''
+        this.mealType = ''
       },
       backToTop: function () {
         this.$vuetify.goTo(0, {duration: 100})
@@ -224,11 +344,15 @@
         let offsetTop = window.pageYOffset || document.documentElement.scrollTop
         offsetTop > 500 ? this.backTop = true : this.backTop = false
       }
-    }
+    },
+    created() {
+      // this.loadMore()
+    },
+    activated() {
+      this.atThisPage = true
+    },
+    deactivated() {
+      this.atThisPage = false
+    },
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

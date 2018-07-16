@@ -7,13 +7,23 @@ import {
 
 export default {
   /**
-   * @name 测试代理跨域
+   * @name get测试代理跨域
    * @desc 在webpack.dev.conf.js中配置proxy
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
-  testProxy(path) {
-    return Vue.prototype.$http.get(path)
+  getProxy(path, param) {
+    return Vue.prototype.$http.get(path, {params: param})
   },
+
+  /**
+   * @name post测试代理跨域
+   * @desc 在webpack.dev.conf.js中配置proxy
+   * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
+   */
+  postProxy(path, param) {
+    return Vue.prototype.$http.post(path, param)
+  },
+
   /**
    * @name post登录
    * @method post
@@ -39,7 +49,7 @@ export default {
    * @method post
    * @returns status:success
    */
-  postOrdersList(query = {}) {
-    return Vue.prototype.$http.post(OrdersListApi, query)
+  postOrdersList(param) {
+    return Vue.prototype.$http.post(OrdersListApi, param)
   }
 }
