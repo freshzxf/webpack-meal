@@ -120,6 +120,15 @@
       </v-flex>
     </v-layout>
 
+    <v-text-field
+      type="file"
+      v-model="file"
+      ref="testFile"
+      label="文件上传"
+      accept="image/*"
+      @change="compressImg"
+    ></v-text-field>
+
     <!--手机号编辑弹窗-->
     <v-dialog v-model="dialog0" max-width="500px">
       <v-card>
@@ -162,6 +171,8 @@
       </v-card>
     </v-dialog>
 
+    <!--<input type="file" @change="compressImg" placeholder="fuck" ref="fuck">-->
+
     <!--底部bar-->
     <v-bottom-nav
       :active.sync="activeBtn"
@@ -201,7 +212,8 @@
         dialog1Loading: false,
         dialog2: false,
         dialog3: false,
-        dialog4: false
+        dialog4: false,
+        file: ''
       }
     },
     methods: {
@@ -217,6 +229,28 @@
         this.dialog1Loading = true
         setTimeout(() => (this.dialog1 = false), 2000)
       },
+      compressImg: function () {
+        let that = this
+        that.$nextTick(function () {
+          console.log(that.getObjUrl(that.file))
+        })
+      }
+    },
+    computed: {
+      getObjUrl: function (file) {
+        let url = null;
+        if (window.createObjcectURL != undefined) {
+          url = window.createObjcectURL(file);
+        } else if (window.URL != undefined) {
+          url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) {
+          url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+      }
+    },
+    created(){
+
     }
   }
 </script>

@@ -7,6 +7,7 @@ import router from './router'
 import store from './vuex/index'
 import Vuetify from 'vuetify'
 import infiniteScroll from 'vue-infinite-scroll'
+import lrz from 'lrz'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 // Helpers
 import colors from 'vuetify/es5/util/colors'
@@ -21,6 +22,7 @@ Vue.use(Vuetify, {
 })
 Vue.use(infiniteScroll)
 Vue.prototype.$http = axios
+Vue.prototype.lrz = lrz
 
 Vue.config.productionTip = false
 
