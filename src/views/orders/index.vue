@@ -40,18 +40,18 @@
           <v-list-tile-action>
             <v-list-tile-action-text>¥ {{ item.money }}</v-list-tile-action-text>
             <v-chip color="orange lighten-2"
-                    v-if="item.state === 1"
+                    v-if="item.state === 1" small
                     text-color="white">待审核
             </v-chip>
             <v-chip color="green lighten-2"
-                    v-if="item.state === 2"
+                    v-if="item.state === 2" small
                     text-color="white">待配送
             </v-chip>
             <v-chip color="purple lighten-2"
-                    v-if="item.state === 3"
+                    v-if="item.state === 3" small
                     text-color="white">待签收
             </v-chip>
-            <v-chip v-if="item.state === 4"
+            <v-chip v-if="item.state === 4" small
                     text-color="white">已完成
             </v-chip>
           </v-list-tile-action>
@@ -90,7 +90,7 @@
     <!--返回顶部按钮-->
     <v-fab-transition>
       <v-btn v-show="backTop"
-             fab depressed small bottom left color="purple lighten-2" @click="backToTop()" fixed>
+            depressed fab small fixed bottom left color="purple lighten-2" @click="backToTop()">
         <v-icon dark>expand_less</v-icon>
       </v-btn>
     </v-fab-transition>
@@ -122,18 +122,19 @@
               :close-on-content-click="false"
               v-model="startDateModal"
               :nudge-right="40"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
               max-width="290px"
               min-width="290px"
+              transition="scale-transition"
+              lazy
+              offset-y
+              full-width
             >
               <!--prepend-icon="event"-->
               <v-text-field
                 slot="activator"
                 v-model="startDate"
                 label="配送起始日期"
+                clearable
                 readonly
               ></v-text-field>
               <v-date-picker v-model="startDate" no-title :first-day-of-week="1" locale="zh-cn"
@@ -147,18 +148,19 @@
               :close-on-content-click="false"
               v-model="endDateModal"
               :nudge-right="40"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
               max-width="290px"
               min-width="290px"
+              transition="scale-transition"
+              lazy
+              offset-y
+              full-width
             >
               <!--prepend-icon="event"-->
               <v-text-field
                 slot="activator"
                 v-model="endDate"
                 label="配送截止日期"
+                clearable
                 readonly
               ></v-text-field>
               <v-date-picker v-model="endDate" no-title :first-day-of-week="1" locale="zh-cn"

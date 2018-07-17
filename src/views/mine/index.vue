@@ -130,12 +130,13 @@
           <v-text-field
             v-model="phone"
             label="请输入常用手机号码"
+            clearable
             required
             type="number"
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="purple lighten-2" class="white--text lspace2 subheading" depressed block @click.stop="dialog0=false">确定</v-btn>
+          <v-btn color="purple lighten-2" :loading="dialog0Loading" class="white--text lspace2 subheading" depressed block @click.stop="saveDialog0">确定</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -150,12 +151,13 @@
           <v-text-field
             v-model="phone"
             label="请输入您的身份证号码"
+            clearable
             required
             type="number"
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="purple lighten-2" class="white--text lspace2 subheading" depressed block @click.stop="dialog1=false">确定</v-btn>
+          <v-btn color="purple lighten-2" :loading="dialog1Loading" class="white--text lspace2 subheading" depressed block @click.stop="saveDialog1">确定</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -194,7 +196,9 @@
         bottomBarDatas: BottomBarDatas,
         phone: '',
         dialog0: false,
+        dialog0Loading: false,
         dialog1: false,
+        dialog1Loading: false,
         dialog2: false,
         dialog3: false,
         dialog4: false
@@ -203,7 +207,16 @@
     methods: {
       openDialog: function(index){
         this['dialog' + index] = true
-      }
+        this['dialog' + index + 'Loading'] = false
+      },
+      saveDialog0: function(){
+        this.dialog0Loading = true
+        setTimeout(() => (this.dialog0 = false), 2000)
+      },
+      saveDialog1: function(){
+        this.dialog1Loading = true
+        setTimeout(() => (this.dialog1 = false), 2000)
+      },
     }
   }
 </script>

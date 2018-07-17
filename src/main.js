@@ -14,9 +14,9 @@ import './assets/style/main'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: colors.purple.darken1, // #E53935
-    secondary: colors.blue.lighten4, // #FFCDD2
-    accent: colors.indigo.base // #3F51B5
+    primary: colors.purple.lighten2, // #E53935
+    secondary: colors.blue.lighten2, // #FFCDD2
+    accent: colors.indigo.lighten2 // #3F51B5
   }
 })
 Vue.use(infiniteScroll)
