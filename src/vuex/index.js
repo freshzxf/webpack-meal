@@ -75,12 +75,14 @@ import Vuex from 'vuex'
 
 import base from './base/base'
 import orders from './orders/orders'
+import uploader from './uploader/uploader'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     base,
-    orders
+    orders,
+    uploader
   }
 })
