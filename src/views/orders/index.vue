@@ -4,13 +4,14 @@
     <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen>
 
       <!--<v-toolbar-side-icon></v-toolbar-side-icon>-->
-      <v-btn icon @click="$router.go(-1)">
-        <v-icon large>keyboard_arrow_left</v-icon>
-      </v-btn>
 
       <v-toolbar-title class="white--text">食材订购单({{length}})</v-toolbar-title>
 
       <v-spacer></v-spacer>
+
+      <v-btn icon @click="$router.go(-1)">
+        <v-icon large>keyboard_arrow_left</v-icon>
+      </v-btn>
 
       <v-btn icon @click.stop="drawer = true">
         <v-icon>search</v-icon>
