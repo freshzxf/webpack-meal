@@ -2,8 +2,11 @@ import Vue from 'vue'
 import {
   LoginApi,
   RegApi,
-  OrdersListApi
+  OrdersListApi,
+  FoodsMenuApi
 } from './resource'
+
+const prototype = Vue.prototype
 
 export default {
   /**
@@ -12,7 +15,7 @@ export default {
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
   getProxy(path, param) {
-    return Vue.prototype.$http.get(path, {params: param})
+    return prototype.$http.get(path, {params: param})
   },
 
   /**
@@ -21,7 +24,7 @@ export default {
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
   postProxy(path, param) {
-    return Vue.prototype.$http.post(path, param)
+    return prototype.$http.post(path, param)
   },
 
   /**
@@ -31,7 +34,7 @@ export default {
    * @returns status:success
    */
   postLogin(account, password) {
-    return Vue.prototype.$http.post(LoginApi)
+    return prototype.$http.post(LoginApi)
   },
 
   /**
@@ -41,7 +44,7 @@ export default {
    * @returns status:success
    */
   postReg(account, password, cellphone) {
-    return Vue.prototype.$http.post(RegApi)
+    return prototype.$http.post(RegApi)
   },
 
   /**
@@ -50,6 +53,15 @@ export default {
    * @returns status:success
    */
   postOrdersList(param) {
-    return Vue.prototype.$http.post(OrdersListApi, param)
+    return prototype.$http.post(OrdersListApi, param)
+  },
+
+  /**
+   * @name post获取食材名称列表
+   * @method post
+   * @returns status:success
+   */
+  postFoodsMenu(param) {
+    return prototype.$http.post(FoodsMenuApi, param)
   }
 }
