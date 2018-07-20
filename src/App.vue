@@ -1,5 +1,28 @@
 <template>
   <v-app id="app" style="height: 100%">
+
+    <!--loading-->
+    <v-dialog
+      v-model="loading"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="indigo lighten-2"
+        dark
+      >
+        <v-card-text>
+          数据加载中，请耐心等候...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <!--主要框架内容-->
     <div
       class="z-app"
@@ -39,6 +62,12 @@
         'leaveAnimate': '' // 页面离开动效
       }
     },
+    // 计算属性
+    computed: {
+      loading() {
+        return this.$store.getters.loading
+      }
+    },
     // 监听路由切换，设置过渡动画
     watch: {
       '$route'(to, from) {
@@ -57,10 +86,6 @@
         this.leaveAnimate = toDepth > fromDepth
           ? 'animated fadeOutRight'
           : 'animated fadeOutLeft'
-
-        // if(toDepth === 3) {
-        // this.leaveAnimate = 'animated fadeOutRight'
-        // }
       }
     }
   }

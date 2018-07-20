@@ -26,6 +26,10 @@ module.exports = {
     // 一行结束后面不要有空格
     "no-trailing-spaces": 0,
     "space-before-function-paren": 0,
+    // 逗号风格，设置建议出现在行尾
+    "comma-style": [1, "last"],
+    // 开启连续申明
+    "one-var": 0,
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development

@@ -23,8 +23,8 @@
 
     </v-toolbar>
 
-    <!--数据列表-->
-    <v-list two-line class="mt56" v-scroll="onScroll">
+    <!--数据列表(无限滚动使用的是全局滚动状态，即每个组件加载的loading状态)-->
+    <v-list two-line class="mt56" v-scroll="onScroll" v-show="show">
       <template v-for="(item, index) in dataList">
         <v-list-tile
           :key="item.id"
@@ -63,35 +63,16 @@
           :key="index"
         ></v-divider>
       </template>
-      <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy"
+      <div v-infinite-scroll="loadMore"
+           infinite-scroll-disabled="busy"
            infinite-scroll-distance="0">
-        <v-dialog
-          v-model="busy"
-          hide-overlay
-          persistent
-          width="300"
-        >
-          <v-card
-            color="indigo lighten-2"
-            dark
-          >
-            <v-card-text>
-              数据加载中，请耐心等候...
-              <v-progress-linear
-                indeterminate
-                color="white"
-                class="mb-0"
-              ></v-progress-linear>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
       </div>
     </v-list>
 
     <!--返回顶部按钮-->
     <v-fab-transition>
       <v-btn v-show="backTop"
-            depressed fab small fixed bottom left color="purple lighten-2" @click="backToTop()">
+             depressed fab small fixed bottom left color="purple lighten-2" @click="backToTop()">
         <v-icon dark>expand_less</v-icon>
       </v-btn>
     </v-fab-transition>
@@ -103,16 +84,6 @@
       right
       temporary
     >
-      <!--<v-list class="pa-1">
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg">
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>条件筛选</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>-->
       <v-divider></v-divider>
       <v-container grid-list-md>
         <v-layout wrap>
@@ -197,31 +168,31 @@
   </div>
 </template>
 <script>
-  /* eslint-disable */
   export default {
     name: 'orders',
     data() {
       return {
-        page: 1 // 默认载入第一页
-        , atThisPage: true // 在使用了keep-alive包裹显示组件的情况下，需要判断当前激活的组件是不是此组件，是的话才加载数据
-        , backTop: false // 默认不显示返回顶部
-        , drawer: false // 侧滑抽屉
-        , startDateModal: false
-        , startDate: ''
-        , endDateModal: false
-        , endDate: ''
-        , mealType: []
+        page: 1, // 默认载入第一页
+        atThisPage: true, // 在使用了keep-alive包裹显示组件的情况下，需要判断当前激活的组件是不是此组件，是的话才加载数据
+        backTop: false, // 默认不显示返回顶部
+        drawer: false, // 默认不显示侧滑抽屉
+        startDateModal: false, // 开始日期日历弹层
+        endDateModal: false, // 截止日期日历弹层
+        startDate: '',
+        endDate: '',
+        mealType: []
       }
     },
     computed: {
-      busy() {
-        return this.$store.state.orders.busy
+      // 控制结构是否显示（首次未完成数据加载不显示，数据无限加载中以及其他各场景均显示）
+      show() {
+        return this.$store.state.orders.show
       },
       dataList() {
         return this.$store.state.orders.ordersList
       },
       length() {
-        return this.$store.state.orders.ordersList.length
+        return this.dataList.length
       }
     },
     methods: {
@@ -234,7 +205,7 @@
             eDate = this.endDate,
             mType = this.mealType,
             page = this.page
-          // 触发vuex中定义的action方法（dispathch不分模块）
+          // 触发vuex中定义的action方法（dispatch不分模块）
           this.$store.dispatch('initList', {sDate, eDate, mType, page})
           this.page++
         }
@@ -271,6 +242,6 @@
     },
     deactivated() {
       this.atThisPage = false
-    },
+    }
   }
 </script>

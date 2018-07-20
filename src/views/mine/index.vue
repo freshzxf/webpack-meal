@@ -33,7 +33,7 @@
               <v-avatar
                 slot="activator"
                 size="86"
-                class="mcenter pa mt-4 mb-2"
+                class="mcenter pa mt-5 mb-2"
                 style="z-index: 1;top: 35px;border: 10px solid rgba(255,255,255,0.3);box-sizing: content-box"
               >
                 <img
@@ -222,7 +222,6 @@
     computed: {
     },
     created(){
-
     }
   }
 </script>

@@ -1,6 +1,6 @@
 /*app主框架外层类*/
 .z-app {
-  transition: 0.3s;
+  /*transition: 0.3s ease;*/
   position: relative;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
 .z-app.hideLeft {
   opacity: 0.75;
   transform: translate3d(-100%, 0, 0);
-  transition: .3s;
+  /*transition: .3s ease;*/
   overflow: hidden;
 }
 
@@ -43,12 +43,12 @@
 }
 
 /*组件切换动画*/
-.animated {
+/*.animated {
   -webkit-animation-duration: 0.3s;
   animation-duration: 0.3s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  /*animation: 0.25s linear;*/
+  !*animation: 0.25s linear;*!
 }
 
 @keyframes fadeInRight {
@@ -117,7 +117,7 @@
 .fadeOutRight {
   -webkit-animation-name: fadeOutRight;
   animation-name: fadeOutRight;
-}
+}*/
 
 /*公共类*/
 .pa{position: absolute}
