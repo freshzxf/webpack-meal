@@ -47,7 +47,7 @@
           >
 
             <v-btn icon small
-                   :key="item2.id"
+                   :key="0 + item2.id"
                    v-if="index2 === 0"
                    class="indigo lighten-2 white--text"
             >
@@ -69,14 +69,14 @@
     </v-tabs-items>
 
     <!--每项食材订购弹层-->
-    <v-dialog v-model="dialog" max-width="300px" :key="foodData.id">
+    <v-dialog v-model="dialog" max-width="300px">
       <v-card>
         <v-card-title>
           {{foodData.name}} （<span class="red--text mr-1">{{foodData.uprice}}</span>元/{{foodData.unit}}）
         </v-card-title>
         <v-card-text>
           <v-text-field
-            v-model="phone"
+            v-model="amount"
             label="请输入订购量（数字）"
             clearable
             required
@@ -99,6 +99,7 @@
     name: 'test',
     data: () => ({
       tab: 'tabDemo',
+      amount: '',
       foodData: {
         name: '',
         unit: '',
