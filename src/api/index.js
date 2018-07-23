@@ -1,12 +1,4 @@
-import Vue from 'vue'
-import {
-  LoginApi,
-  RegApi,
-  OrdersListApi,
-  FoodsMenuApi
-} from './resource'
-
-const prototype = Vue.prototype
+import {getData, postData} from './axios'
 
 export default {
   /**
@@ -15,7 +7,7 @@ export default {
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
   getProxy(path, param) {
-    return prototype.$http.get(path, {params: param})
+    return getData(path, {params: param})
   },
 
   /**
@@ -24,7 +16,7 @@ export default {
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
   postProxy(path, param) {
-    return prototype.$http.post(path, param)
+    return postData(path, param)
   },
 
   /**
@@ -34,7 +26,7 @@ export default {
    * @returns status:success
    */
   postLogin(account, password) {
-    return prototype.$http.post(LoginApi)
+    return postData('/login')
   },
 
   /**
@@ -44,7 +36,7 @@ export default {
    * @returns status:success
    */
   postReg(account, password, cellphone) {
-    return prototype.$http.post(RegApi)
+    return postData('reg')
   },
 
   /**
@@ -53,7 +45,7 @@ export default {
    * @returns status:success
    */
   postOrdersList(param) {
-    return prototype.$http.post(OrdersListApi, param)
+    return postData('/ordersList', param)
   },
 
   /**
@@ -62,6 +54,6 @@ export default {
    * @returns status:success
    */
   postFoodsMenu(param) {
-    return prototype.$http.post(FoodsMenuApi, param)
+    return postData('/foodsMenu', param)
   }
 }

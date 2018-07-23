@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" style="height: 100%">
+  <v-app id="app">
 
     <!--loading-->
     <v-dialog
@@ -35,17 +35,17 @@
       </keep-alive>
     </div>
     <!--副页框架内容-->
-    <transition
+    <!--<transition
       name="custom-classes-transition"
       :enter-active-class="enterAnimate"
-      :leave-active-class="leaveAnimate">
-      <keep-alive>
-        <router-view
-          name="subPage"
-          class="router-view">
-        </router-view>
-      </keep-alive>
-    </transition>
+      :leave-active-class="leaveAnimate">-->
+    <keep-alive>
+      <router-view
+        name="subPage"
+        class="router-view">
+      </router-view>
+    </keep-alive>
+    <!--</transition>-->
   </v-app>
 </template>
 

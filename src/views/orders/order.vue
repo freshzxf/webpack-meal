@@ -58,7 +58,7 @@
               :key="item2.id"
               :unit="item2.unit"
               :uprice="item2.uprice"
-              @click="orderItem(item2.title, item2.unit, item2.upirce, item2.id)"
+              @click="orderItem(item2.title, item2.unit, item2.uprice, item2.id)"
               small
             >
               {{item2.title}}
@@ -94,7 +94,6 @@
   </div>
 </template>
 <script>
-  // '蔬菜', '荤菜', '豆制', '干菜', '调料', '粮油', '水果'
   export default {
     name: 'test',
     data: () => ({

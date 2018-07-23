@@ -39,7 +39,7 @@
           </v-list-tile-content>
 
           <v-list-tile-action>
-            <v-list-tile-action-text>¥ {{ item.money }}</v-list-tile-action-text>
+            <v-list-tile-action-text class="font-italic font-weight-thin">¥ {{ item.money }}</v-list-tile-action-text>
             <v-chip color="orange lighten-2"
                     v-if="item.state === 1" small
                     text-color="white">待审核

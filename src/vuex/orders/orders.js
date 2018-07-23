@@ -37,7 +37,7 @@ const actions = {
     // 异步修改shop对象
     let ajaxOrdersList
     API.postOrdersList(param).then((result) => {
-      if (result.data.data && result.data.data.length) ajaxOrdersList = result.data.data
+      if (result.data && result.data.length) ajaxOrdersList = result.data
       // 关闭公共loading
       dispatch('hideLoading')
       // commit执行的是mutaions中对应的修改公共state的方法（根据type值寻找，并传入载荷对象参数进行修改）
@@ -62,7 +62,7 @@ const actions = {
     // 异步修改shop对象
     let ajaxFoodMenu
     API.postFoodsMenu(param).then((result) => {
-      if (result.data.data && result.data.data.length) ajaxFoodMenu = result.data.data
+      if (result.data && result.data.length) ajaxFoodMenu = result.data
       // 关闭公共loading
       dispatch('hideLoading')
       // commit执行的是mutaions中对应的修改公共state的方法（根据type值寻找，并传入载荷对象参数进行修改）

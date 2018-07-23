@@ -91,7 +91,7 @@
           </div>
 
           <!--list列表-->
-          <v-list class="">
+          <v-list class="py-0">
             <template v-for="(item, index) in items">
               <!--模板-->
               <v-list-tile :key="item.title" @click.native="openDialog(index)">
