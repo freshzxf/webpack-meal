@@ -7,8 +7,15 @@ const state = {
   show: false
 }
 
+// todo:待完善getters
 const getters = {
-  // orders: state => state.orders,
+  selectedFoodsMenu: function (state) {
+   state.foodsMenu.forEach(function (item, index, arr) {
+     item.content.filter(function (item1, index1, arr1) {
+        return item1.content.amount > 0
+     })
+   })
+  }
   // order: state => state.order
   // needPayOrders: state => state.needPayOrders,
   // needSeedOrders: state => state.needSeedOrders,
@@ -26,6 +33,10 @@ const mutations = {
   },
   [types.SHOW_ORDERSLIST](state, payload) {
     state.show = payload.show
+  },
+  // 修改食材订购量
+  editFoodData(state, data) {
+    state.foodsMenu[data.idx].content[data.idx1].content[data.idx2].amount = data.currentAmount
   }
 }
 
