@@ -10,11 +10,24 @@ const state = {
 // todo:待完善getters
 const getters = {
   selectedFoodsMenu: function (state) {
-   state.foodsMenu.forEach(function (item, index, arr) {
-     item.content.filter(function (item1, index1, arr1) {
-        return item1.content.amount > 0
-     })
-   })
+    let sfmTpl = []
+    state.foodsMenu.forEach(function (item, index) {
+      item.content.forEach(function (item1, index1) {
+        item1.content.filter(function (item2, index2, arr) {
+          if (item2.amount > 0) {
+            sfmTpl.push(item2)
+          }
+        })
+      })
+    })
+    return sfmTpl
+    // return state.foodsMenu.filter(function (item, index, arr) {
+    //   item.content.filter(function (item1, index1, arr1) {
+    //     item1.content.filter(function (item2, index2, arr2) {
+    //       return item2.title.length
+    //     })
+    //   })
+    // })
   }
   // order: state => state.order
   // needPayOrders: state => state.needPayOrders,

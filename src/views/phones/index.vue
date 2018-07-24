@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--导航-->
-    <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen scroll-target="#scrolling">
+    <v-toolbar color="primary" dark fixed scroll-off-screen scroll-target="#scrolling">
       <!--<v-toolbar-side-icon></v-toolbar-side-icon>-->
       <v-btn icon @click="$router.go(-1)">
         <v-icon large>keyboard_arrow_left</v-icon>

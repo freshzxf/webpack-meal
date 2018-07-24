@@ -1,15 +1,19 @@
 <template>
   <div class="white py-2">
     <!--导航-->
-    <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen>
+    <v-toolbar color="primary" dark fixed scroll-off-screen>
       <v-toolbar-title class="white--text">食材订购</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="$router.go(-1)">
         <v-icon large>keyboard_arrow_left</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon>list</v-icon>
-      </v-btn>
+
+      <v-badge right>
+        <v-btn icon @click.native="fullDialog = true">
+          <span slot="badge" class="red">6</span>
+          <v-icon>list</v-icon>
+        </v-btn>
+      </v-badge>
 
       <!--tab标题(需要在非loading状态下才渲染此tab组件，如果仅仅使用v-show，该组件会在页面加载完毕立即渲染，但是无数据，当数据请求成功后，因tab组件未再次渲染，会导致无法展示默认内容的bug)-->
       <v-tabs
@@ -95,6 +99,29 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog
+      v-model="fullDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+      scrollable
+    >
+      <v-card tile>
+        <v-toolbar card dark color="primary">
+          <v-btn icon dark @click.native="fullDialog = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+          <v-toolbar-title>食材订购单</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-menu bottom right offset-y>
+            <v-btn slot="activator" dark icon>
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+          </v-menu>
+        </v-toolbar>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 <script>
@@ -114,6 +141,7 @@
         index: ''
       },
       dialog: false,
+      fullDialog: false,
       dialogLoading: false
     }),
     methods: {
@@ -135,8 +163,22 @@
           index
         }
       },
+      // 过食谱中已存在订购量的食材
+      filterSelectedFoodsMenu() {
+        let sfmTpl = []
+        this.foodsMenu.forEach(function (item, index) {
+          item.content.forEach(function (item1, index1) {
+            item1.content.filter(function (item2, index2, arr) {
+              if (item2.hasOwnProperty('amount') && item2.amount > 0) {
+                sfmTpl.push(item2)
+              }
+            })
+          })
+        })
+        return sfmTpl
+      },
+      // 保存当前食材订购量
       saveOrderItem() {
-        console.log(this.$store.getters.selectedFoodsMenu)
         // 按钮开启loading状态
         this.dialogLoading = true
         // 设置传入数据
@@ -151,6 +193,7 @@
         // 关闭按钮loading状态并关闭弹层
         this.dialogLoading = false
         this.dialog = false
+        console.log(this.selectedFoodsMenu, this.selectedFoodsMenuLength)
       }
     },
     computed: {
@@ -158,7 +201,15 @@
       loading() {
         return this.$store.getters.loading
       },
-
+      // 已订购食材数据
+      selectedFoodsMenu() {
+        return this.filterSelectedFoodsMenu()
+      },
+      // 已订购食材数据条数
+      selectedFoodsMenuLength() {
+        return this.selectedFoodsMenu.length
+      },
+      // 食材单数据
       foodsMenu() {
         return this.$store.state.orders.foodsMenu
       }

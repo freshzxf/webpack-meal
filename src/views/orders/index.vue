@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--导航-->
-    <v-toolbar color="purple lighten-2" dark fixed scroll-off-screen>
+    <v-toolbar color="primary" dark fixed scroll-off-screen>
 
       <!--<v-toolbar-side-icon></v-toolbar-side-icon>-->
 
@@ -48,7 +48,7 @@
                     v-if="item.state === 2" small
                     text-color="white">待配送
             </v-chip>
-            <v-chip color="purple lighten-2"
+            <v-chip color="primary"
                     v-if="item.state === 3" small
                     text-color="white">待签收
             </v-chip>
@@ -72,7 +72,7 @@
     <!--返回顶部按钮-->
     <v-fab-transition>
       <v-btn v-show="backTop"
-             depressed fab small fixed bottom left color="purple lighten-2" @click="backToTop()">
+             depressed fab small fixed bottom left color="primary" @click="backToTop()">
         <v-icon dark>expand_less</v-icon>
       </v-btn>
     </v-fab-transition>
@@ -110,7 +110,7 @@
                 readonly
               ></v-text-field>
               <v-date-picker v-model="startDate" no-title :first-day-of-week="1" locale="zh-cn"
-                             @input="startDateModal = false" color="purple lighten-2"></v-date-picker>
+                             @input="startDateModal = false" color="primary"></v-date-picker>
             </v-menu>
           </v-flex>
           <!--截止日期-->
@@ -136,7 +136,7 @@
                 readonly
               ></v-text-field>
               <v-date-picker v-model="endDate" no-title :first-day-of-week="1" locale="zh-cn"
-                             @input="endDateModal = false" color="purple lighten-2" scrollable></v-date-picker>
+                             @input="endDateModal = false" color="primary" scrollable></v-date-picker>
             </v-menu>
           </v-flex>
           <!--餐别筛选-->
@@ -160,7 +160,7 @@
           <v-btn color="red lighten-2" depressed dark @click.native="clearForm">重置</v-btn>
         </v-flex>
         <v-flex xs4>
-          <v-btn color="purple lighten-2" depressed dark @click.native="filterData">确认筛选</v-btn>
+          <v-btn color="primary" depressed dark @click.native="filterData">确认筛选</v-btn>
         </v-flex>
       </v-layout>
 

@@ -96,7 +96,7 @@
               <!--模板-->
               <v-list-tile :key="item.title" @click.native="openDialog(index)">
                 <v-list-tile-action>
-                  <v-icon color="purple lighten-2">{{item.icon}}</v-icon>
+                  <v-icon color="primary">{{item.icon}}</v-icon>
                 </v-list-tile-action>
 
                 <v-list-tile-content>
@@ -136,7 +136,7 @@
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="purple lighten-2" :loading="dialog0Loading" class="white--text lspace2 subheading" depressed block @click.stop="saveDialog0">确定</v-btn>
+          <v-btn color="primary" :loading="dialog0Loading" class="white--text lspace2 subheading" depressed block @click.stop="saveDialog0">确定</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -157,7 +157,7 @@
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="purple lighten-2" :loading="dialog1Loading" class="white--text lspace2 subheading" depressed block @click.stop="saveDialog1">确定</v-btn>
+          <v-btn color="primary" :loading="dialog1Loading" class="white--text lspace2 subheading" depressed block @click.stop="saveDialog1">确定</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
