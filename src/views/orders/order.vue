@@ -8,9 +8,9 @@
         <v-icon large>keyboard_arrow_left</v-icon>
       </v-btn>
 
-      <v-badge right>
-        <v-btn icon @click.native="fullDialog = true">
-          <span slot="badge" class="red">6</span>
+      <v-badge right overlap color="primary">
+        <span slot="badge" class="yellow--text" v-if="selectedFoodsMenuLen">{{selectedFoodsMenuLen}}</span>
+        <v-btn icon small @click.native="fullDialog = true">
           <v-icon>list</v-icon>
         </v-btn>
       </v-badge>
@@ -99,6 +99,7 @@
       </v-card>
     </v-dialog>
 
+    <!--全屏modal-->
     <v-dialog
       v-model="fullDialog"
       fullscreen
@@ -130,7 +131,6 @@
     data: () => ({
       tab: 'tabDemo',
       amount: '',
-      tplItems: [],
       foodData: {
         name: '',
         unit: '',
@@ -140,6 +140,8 @@
         index1: '',
         index: ''
       },
+      selectedFoodsMenu: [],
+      selectedFoodsMenuLen: '',
       dialog: false,
       fullDialog: false,
       dialogLoading: false
@@ -186,28 +188,21 @@
         let idx1 = this.foodData.index1
         let idx2 = this.foodData.index2
         let currentAmount = this.amount
-        // 备份存储一份初始菜单
-        // this.tplItems = this.foodsMenu
         // 非异步直接修改vuex中mutations（根据三层索引找到修改点，传入数量值修改订购量）
         this.$store.commit('editFoodData', {idx, idx1, idx2, currentAmount})
         // 关闭按钮loading状态并关闭弹层
         this.dialogLoading = false
         this.dialog = false
-        console.log(this.selectedFoodsMenu, this.selectedFoodsMenuLength)
+
+        // 修改已订购食材及已订购食材种类响应数据
+        this.selectedFoodsMenu = this.filterSelectedFoodsMenu()
+        this.selectedFoodsMenuLen = this.filterSelectedFoodsMenu().length
       }
     },
     computed: {
       // 全局loading
       loading() {
         return this.$store.getters.loading
-      },
-      // 已订购食材数据
-      selectedFoodsMenu() {
-        return this.filterSelectedFoodsMenu()
-      },
-      // 已订购食材数据条数
-      selectedFoodsMenuLength() {
-        return this.selectedFoodsMenu.length
       },
       // 食材单数据
       foodsMenu() {
