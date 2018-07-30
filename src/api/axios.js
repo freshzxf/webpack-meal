@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+
 export const commonParams = {}
 
 const instance = axios.create({
@@ -9,6 +10,16 @@ const instance = axios.create({
     'Content-Type': 'application/x-www-form-urlencoded',
     'Accept': 'application/json'
   }
+})
+
+// POST传参序列化
+axios.interceptors.request.use((config) => {
+  if (config.method === 'post') {
+    config.data = qs.stringify(config.data)
+  }
+  return config
+}, (error) => {
+  return Promise.reject(error)
 })
 
 /**
