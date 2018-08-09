@@ -1,3 +1,23 @@
+/**
+ * @desc: axios是基于es6的Promise而实现的一款既能运行在浏览器端（XMLHttpRequest），又能运行在Node端（Http）数据异步请求插件
+ * @note1: Promise对象用于一个异步操作的最终完成（或失败）及其结果值的表示
+ * @note2: new Promise(executor) 创建一个promise对象，参数是一个执行器函数（该执行器函数有两个默认参数：resolve、reject）
+ * @note3: 上述用于异步逻辑，如果成功了则调用resolve将状态置为fullfilled，如果失败了则调用reject（支持传入reason参数，用于说明错误，会被传入catch中读取）将状态置为rejected
+ * @note4: 任何Promise对象都有then方法（Promise.prototype.then()）,该then方法可接受两个函数作为参数，如then(successFun, failFun)，分别执行成功或失败回调逻辑，并最终返回一个新的Promise对象
+ * @note5: 任何Promise对象都有catch方法（Promise.prototype.catch()）,此方法用于捕获上一步的Promise被rejected的回调，如果then方法中第二个函数参数效果
+ * @note6: 除非Promise.then()方法内部抛出异常或者是明确置为rejected态，否则它返回的Promise的状态都是fulfilled态，即完成态，并且它的状态不受它的上一级的状态的影响。
+ * @note7: Promise.resolve()接受一个参数值，可以是普通的值，具有then()方法的对象和Promise实例。正常情况下，它返回一个Promise对象，状态为fulfilled。但是，当解析时发生错误时，返回的Promise对象将会置为rejected态
+ * 如：// 参数为Promise实例,但参数是rejected态
+     var p8 = Promise.reject(8); // rejected
+     var p9 = Promise.resolve(p8); resolve一个rejected参数，返回的是rejected状态
+
+     p9.then(function(data) {
+      // 这里的值时Promise实例返回的值
+      console.log('fulfilled:'+ data); // 不执行
+    }).catch(function(err) {
+      console.log('rejected:' + err); // rejected: 8
+    });
+ */
 import axios from 'axios'
 import qs from 'qs'
 
@@ -111,7 +131,7 @@ export default axios
  * @param param
  * @returns {Promise<AxiosResponse>}
  */
-export function getData(urlLink, param) {
+export function get(urlLink, param) {
   const url = urlLink
   const data = Object.assign({}, commonParams, param)
 
@@ -120,12 +140,11 @@ export function getData(urlLink, param) {
     timeout: 5000
   })
     .then((res) => {
-      console.info('then', res)
       return Promise.resolve(res.data)
     })
     .catch(function (error) {
-      console.info('error', error)
-      return Promise.resolve(error.data)
+      console.info('get请求错误原因：', error)
+      return Promise.resolve(error)
     })
 }
 
@@ -135,14 +154,14 @@ export function getData(urlLink, param) {
  * @param param
  * @returns {Promise<AxiosResponse>}
  */
-export function postData(urlLink, param) {
+export function post(urlLink, param) {
   const data = Object.assign({}, commonParams, param)
   return instance.post(urlLink, qs.stringify(data))
     .then((res) => {
       return Promise.resolve(res.data)
     })
     .catch(function (error) {
-      console.info('postDataerror', error)
+      console.info('post请求错误原因：', error)
       return Promise.resolve(error)
     })
 }

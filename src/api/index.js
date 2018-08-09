@@ -1,4 +1,4 @@
-import {getData, postData} from './axios'
+import {get, post} from './axios'
 
 export default {
   /**
@@ -7,7 +7,7 @@ export default {
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
   getProxy(path, param) {
-    return getData(path, {params: param})
+    return get(path, {params: param})
   },
 
   /**
@@ -16,7 +16,7 @@ export default {
    * @desc 将请求本地服务器（同源）的接口由本地服务器代理发送请求至目标服务器（服务器端发送的任何请求不存在跨域限制）
    */
   postProxy(path, param) {
-    return postData(path, param)
+    return post(path, param)
   },
 
   /**
@@ -26,7 +26,7 @@ export default {
    * @returns status:success
    */
   postLogin(account, password) {
-    return postData('/login')
+    return post('/login')
   },
 
   /**
@@ -36,7 +36,7 @@ export default {
    * @returns status:success
    */
   postReg(account, password, cellphone) {
-    return postData('reg')
+    return post('reg')
   },
 
   /**
@@ -45,7 +45,7 @@ export default {
    * @returns status:success
    */
   postOrdersList(param) {
-    return postData('/ordersList', param)
+    return post('/ordersList1', param)
   },
 
   /**
@@ -54,6 +54,6 @@ export default {
    * @returns status:success
    */
   postFoodsMenu(param) {
-    return postData('/foodsMenu', param)
+    return post('/foodsMenu', param)
   }
 }
