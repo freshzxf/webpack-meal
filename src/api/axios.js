@@ -7,6 +7,13 @@
  * @note5: 任何Promise对象都有catch方法（Promise.prototype.catch()）,此方法用于捕获上一步的Promise被rejected的回调，如果then方法中第二个函数参数效果
  * @note6: 除非Promise.then()方法内部抛出异常或者是明确置为rejected态，否则它返回的Promise的状态都是fulfilled态，即完成态，并且它的状态不受它的上一级的状态的影响。
  * @note7: Promise.resolve()接受一个参数值，可以是普通的值，具有then()方法的对象和Promise实例。正常情况下，它返回一个Promise对象，状态为fulfilled。但是，当解析时发生错误时，返回的Promise对象将会置为rejected态
+ * @note8: Promise是一种链式的回调，每一个then或者catch返回的是一个已经处理过的promise对象，同时catch只能catch之前链条中出现的错误。如果catch到了错误但是并未reject错误，系统默认catch到了错误并已处理，则catch后面的then还会被执行，比如这种情况：
+ *    promise.catch(function(error){
+         console.log("失败了:"+error); // 会执行
+        }).then(function(str){
+        console.log("成功了:"+str); // 会执行
+      });
+ * @note9: catch捕获到错误如果并未抛出新的错误，则会默认错误已处理好，如果抛出了新的错误，则后面需要继续添加catch错误的链式逻辑，不然会报错“Uncaught (in promise) ”（出现错误但是没有不捕获错误的方法）
  * 如：// 参数为Promise实例,但参数是rejected态
      var p8 = Promise.reject(8); // rejected
      var p9 = Promise.resolve(p8); resolve一个rejected参数，返回的是rejected状态
