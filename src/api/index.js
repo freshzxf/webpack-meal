@@ -45,7 +45,7 @@ export default {
    * @returns status:success
    */
   postOrdersList(param) {
-    return post('/ordersList1', param)
+    return post('/ordersList', param)
   },
 
   /**
